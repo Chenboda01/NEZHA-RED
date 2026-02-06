@@ -233,6 +233,19 @@ class AODSManager:
             anchor="center",
         )
 
+        # Add exit button
+        exit_button = tk.Button(
+            window,
+            text="Exit Screensaver",
+            font=("Courier", 14, "bold"),
+            bg="#cc0033",
+            fg="#ffffff",
+            command=self._close_screensaver,
+        )
+        self.canvas.create_window(
+            screen_width // 2, screen_height - 80, window=exit_button
+        )
+
         # Bind events to close screensaver - use multiple approaches for better capture
         def on_any_event(event=None):
             self._close_screensaver()
@@ -324,7 +337,15 @@ class AODSManager:
         # Unbind events from window
         if self.screensaver_window:
             try:
-                for event in ["<Key>", "<Escape>", "<Return>", "<space>", "<Button-1>", "<Button-3>", "<Motion>"]:
+                for event in [
+                    "<Key>",
+                    "<Escape>",
+                    "<Return>",
+                    "<space>",
+                    "<Button-1>",
+                    "<Button-3>",
+                    "<Motion>",
+                ]:
                     try:
                         self.screensaver_window.unbind(event)
                     except:
